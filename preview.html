@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>결제 완료</title>
+
+  <!-- 카카오톡 미리보기 -->
+  <meta property="og:title" content="💳 결제 완료 안내">
+  <meta property="og:description" content="3,900원 결제가 완료되었습니다. 확인해주세요.">
+  <meta property="og:image" content="https://i.imgur.com/ZcLLrkY.png">
+
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    #loading-container {
+      width: 80%;
+      max-width: 300px;
+      border: 1px solid #555;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    #loading-bar {
+      width: 0%;
+      height: 20px;
+      background: limegreen;
+      transition: width 0.2s;
+    }
+
+    #cat {
+      display: none;
+      max-width: 90%;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 id="text">결제 내역 확인 중...</h2>
+
+  <div id="loading-container">
+    <div id="loading-bar"></div>
+  </div>
+
+  <img id="cat" src="https://cataas.com/cat" alt="고양이">
+
+  <!-- 야옹 소리 -->
+  <audio id="meow" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
+
+  <script>
+    let progress = 0;
+    const bar = document.getElementById("loading-bar");
+    const cat = document.getElementById("cat");
+    const text = document.getElementById("text");
+    const meow = document.getElementById("meow");
+
+    const interval = setInterval(() => {
+      progress += Math.random() * 15;
+      bar.style.width = progress + "%";
+
+      if (progress >= 100) {
+        clearInterval(interval);
+
+        text.innerText = "처리 완료!";
+        document.getElementById("loading-container").style.display = "none";
+
+        // 고양이 등장 + 소리
+        cat.style.display = "block";
+        meow.play();
+
+        setTimeout(() => {
+          alert("🐱 만우절 낚시 성공 😆");
+        }, 500);
+      }
+    }, 300);
+  </script>
+
+</body>
+</html>
